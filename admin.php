@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,27 +22,26 @@ include "global.php";
 session_start();
 $title = $_POST["title"];
 $description = $_POST["description"];
-$gsectq = mysql_fetch_assoc(mysql_query("SELECT max(id) as id from sections"));
-$cid = $gsectq["id"] + 1;
+
 $reason = $_POST["reason"];
 $ip = $_POST["ip"];
 
-    if($gsectq["id"] == "")
-    	$cid = "0";
-		
-$gbanq = mysql_fetch_assoc(mysql_query("SELECT max(id) as id from bans"));
-
-$banid = $gbanq["id"] + 1;
-	
-	if($gbanq["id"] == "")
-    	$banid = "0";
-
 	if(isset($_POST["reason"]))
-	mysql_query("INSERT INTO bans (id, ip, reason) VALUES ('" . $banid++ . "', '" . $ip . "', '" . $reason . "')");
-if(strlen($title) > 5 and strlen($description) > 10)
+	{
+		$conn -> prepare("INSERT INTO bans (id, ip, reason) VALUES (NULL, :ip, :reason)");
+		$conn -> bindParam(':ip', $ip);
+		$conn -> bindParam(':reason', $reason);
+		$conn -> execute();
+	}
 
-
-	mysql_query("INSERT INTO sections (id, title, description) VALUES ('" . $cid++ . "', '" . $title . "', '" . $description . "')");
+	if(strlen($title) > 5 and strlen($description) > 10)
+	{
+		$conn -> prepare("INSERT INTO sections (id, title, description) VALUES (NULL, :title, :description)");
+		$conn -> bindParam(':title', $title);
+		$conn -> bindParam(':description', $description);
+		$conn -> execute();	
+	}
+	
 	$webadmin = mysql_fetch_assoc(mysql_query("SELECT username, webadmin from users where username = '" . $_SESSION["username"] . "'"));
 	if($webadmin["webadmin"] == 0)
 
