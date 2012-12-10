@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `bans` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `ip` varchar(16) NOT NULL,
   `reason` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `bans` (
 --
 
 CREATE TABLE IF NOT EXISTS `comments` (
-  `id` int(255) DEFAULT NULL,
+  `id` int(255) DEFAULT NULL AUTO_INCREMENT,
   `cid` int(255) NOT NULL,
   `comment` varchar(255) NOT NULL,
   `username` varchar(255) DEFAULT NULL,
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
 --
 
 CREATE TABLE IF NOT EXISTS `questions` (
-  `id` int(10) DEFAULT NULL,
+  `id` int(10) DEFAULT NULL AUTO_INCREMENT,
   `questions` varchar(255) DEFAULT NULL,
   `answers` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `questions` (
 --
 
 CREATE TABLE IF NOT EXISTS `sections` (
-  `id` int(16) NOT NULL,
+  `id` int(16) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -92,9 +92,9 @@ INSERT INTO `sections` (`id`, `title`, `description`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
   `username` varchar(32) NOT NULL,
   `password` varchar(50) NOT NULL,
-  `id` int(255) NOT NULL,
   `fname` varchar(255) NOT NULL,
   `lname` varchar(255) NOT NULL,
   `ip` varchar(16) NOT NULL,
