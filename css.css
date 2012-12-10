@@ -1,0 +1,51 @@
+	span
+	{
+		border-width:2px;
+		border-radius:10px;
+		border-style:solid;
+		padding:10px;
+		display:inline-block;
+		width:200px;
+		text-align:left;	
+	}
+	div.questions
+	{
+		border-width:2px;
+		text-align:center;
+		border-radius:10px;	
+		background-color:white;
+		margin-left:150px;
+		margin-right:150px;
+		margin-top:400px;
+		padding:40px;
+	}	
+	body
+	{
+		background-color:gray;
+		font-family:Verdana;
+		font-size:12px;
+		color:gray;
+	}
+	img
+	{
+		margin-right:5px;
+	}	
+	
+	div#border
+{
+    text-align:left;
+	border-width:2px;
+	border-radius:10px;
+	background-color:cornflowerblue;
+	border-style:solid;
+	display:inline;
+	padding: 15px;
+	margin-top:-9em;
+	margin-left:-15em;
+	float:middle;
+	position:absolute;
+	left:50%;
+	top:50%;
+	width:25em;
+	height:9em;
+}
