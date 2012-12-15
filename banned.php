@@ -3,7 +3,12 @@
 include "config.php";
 $banq = mysql_fetch_assoc(mysql_query("SELECT ip, reason from bans where ip = '" . $_SERVER['REMOTE_ADDR'] . "'"));
 
-if($banq["ip"] == "")
+$conn->prepare("SELECT ip, reason from bans where ip = :ip");
+$conn->bindParam(":ip", $_SERVER['REMOTE_ADDR']);
+$conn->execute();
+
+$banq = $conn->fetch();
+if(!isset($banq["ip"]))
 	header("Location: index.php");
 ?>
 
@@ -30,6 +35,6 @@ div
 </head>
 
 <body>
-	<?php echo "<div>You have been banned for the reason: " . mysql_real_escape_string($banq["reason"]) . "</div>"; ?>
+	<?php echo "<div>You have been banned for the reason: " . htmlentities($banq["reason"]) . "</div>"; ?>
 </body>
 </html>
