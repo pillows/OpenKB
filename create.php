@@ -3,9 +3,6 @@ include "config.php";
 include "global.php";
 $question = $_POST["question"];
     $title = $_POST["title"];
-    $guserq = mysql_fetch_assoc(mysql_query("SELECT max(id) as id from questions"));
-    $cid = $guserq["id"] + 1;
-	$aSelect = $_POST["options"];	
 ?>
 
 <!DOCTYPE html>
@@ -20,12 +17,14 @@ $question = $_POST["question"];
 <body>
 <?php 
 
-    if($guserq["id"] == "")
-    	$cid = "0";
-	$cid = $guserq["id"] + 1;
+
     if(strlen($title) > 5 and strlen($question) > 10)
     {
-    	mysql_query("INSERT INTO questions (id, questions, answers, title, author, admina, section, allowusercomment) VALUES ('" . $cid++ . "', '" . $question . "', '" . $cid . "', '" . $title . "', '" . $cid . "', '" . $cid . "', '" . $aSelect . "', ' 1 ')");
+    	$dbh->prepare("INSERT INTO questions (id, questions, answers, title, author, admina, section, allowusercomment) VALUES (NULL, :question, NULL, :title, NULL, NULL, :aSelect, ' 1 ')";
+    	$dbh->bindParams(":question",$question);
+    	$dbh->bindParam(":title",$title);
+    	$dbh->bindParam(":aSelect",$aSelect);
+    	$dbh->execute();
     }
 	if(strlen($title) < 5 and strlen($question) < 10 and $title != "" and $question != "")
     	echo "Either your title or question is not specific enough";
